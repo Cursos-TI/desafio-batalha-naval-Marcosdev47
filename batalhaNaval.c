@@ -64,6 +64,23 @@ int main() {
     // Inicializa o tabuleiro
     inicializarTabuleiro(tabuleiro);
 
+    // Valida e posiciona o navio horizontal
+    if (podePosicionar(tabuleiro, linhaH, colunaH, 1)) {
+        posicionarNavio(tabuleiro, linhaH, colunaH, 1);
+    } else {
+        printf("Erro: Não foi possível posicionar o navio horizontal.\n");
+    }
+
+    // Valida e posiciona o navio vertical
+    if (podePosicionar(tabuleiro, linhaV, colunaV, 0)) {
+        posicionarNavio(tabuleiro, linhaV, colunaV, 0);
+    } else {
+        printf("Erro: Não foi possível posicionar o navio vertical.\n");
+    }
+
+    // Exibe o tabuleiro final
+    exibirTabuleiro(tabuleiro);
+
 
 
 
