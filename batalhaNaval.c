@@ -1,14 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h> // Para uso da função abs
 
 // Desafio Batalha Naval - MateCheck
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
-
+//Constantes
 #define TAM_TABULEIRO 10
 #define TAM_NAVIO 3
 #define VALOR_AGUA 0
 #define VALOR_NAVIO 3
+#define VALOR_HABILIDADE 5
+#define TAM_HABILIDADE 5
 
 // Função para inicializar o tabuleiro com 0 (representando água)
 void inicializarTabuleiro(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO]) {
@@ -63,12 +66,62 @@ void posicionarNavioDiagonal(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO], int li
     }
 }
 
+// Gera matriz em formato de cone com expansão central para base
+void gerarHabilidadeCone(int habilidade[TAM_HABILIDADE][TAM_HABILIDADE]) {
+    for (int i = 0; i < TAM_HABILIDADE; i++) {
+        for (int j = 0; j < TAM_HABILIDADE; j++) {
+            // Marca 1 nos pontos dentro da abertura do cone
+            habilidade[i][j] = (j >= TAM_HABILIDADE / 2 - i && j <= TAM_HABILIDADE / 2 + i) ? 1 : 0;
+        }
+    }
+}
+
+// Gera matriz em formato de cruz (linha e coluna centrais marcadas)
+void gerarHabilidadeCruz(int habilidade[TAM_HABILIDADE][TAM_HABILIDADE]) {
+    for (int i = 0; i < TAM_HABILIDADE; i++) {
+        for (int j = 0; j < TAM_HABILIDADE; j++) {
+            habilidade[i][j] = (i == TAM_HABILIDADE / 2 || j == TAM_HABILIDADE / 2) ? 1 : 0;
+        }
+    }
+}
+
+// Gera matriz em formato de octaedro (losango centrado)
+void gerarHabilidadeOctaedro(int habilidade[TAM_HABILIDADE][TAM_HABILIDADE]) {
+    for (int i = 0; i < TAM_HABILIDADE; i++) {
+        for (int j = 0; j < TAM_HABILIDADE; j++) {
+            // Soma das distâncias absolutas ao centro menor ou igual ao raio
+            habilidade[i][j] = (abs(i - TAM_HABILIDADE / 2) + abs(j - TAM_HABILIDADE / 2) <= TAM_HABILIDADE / 2) ? 1 : 0;
+        }
+    }
+}
+
+// Aplica matriz de habilidade sobre o tabuleiro a partir de um ponto central
+void aplicarHabilidade(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO], int habilidade[TAM_HABILIDADE][TAM_HABILIDADE], int origemLinha, int origemColuna) {
+    int offset = TAM_HABILIDADE / 2;
+    for (int i = 0; i < TAM_HABILIDADE; i++) {
+        for (int j = 0; j < TAM_HABILIDADE; j++) {
+            int x = origemLinha - offset + i;
+            int y = origemColuna - offset + j;
+            // Marca a habilidade no tabuleiro apenas se dentro dos limites e em água
+            if (x >= 0 && x < TAM_TABULEIRO && y >= 0 && y < TAM_TABULEIRO && habilidade[i][j] == 1 && tabuleiro[x][y] == VALOR_AGUA) {
+                tabuleiro[x][y] = VALOR_HABILIDADE;
+            }
+        }
+    }
+}
+
+
 // Função para exibir o tabuleiro no console
 void exibirTabuleiro(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO]) {
     printf("Tabuleiro:\n");
     for (int i = 0; i < TAM_TABULEIRO; i++) {
         for (int j = 0; j < TAM_TABULEIRO; j++) {
-            printf("%d ", tabuleiro[i][j]);
+            char c;
+            if (tabuleiro[i][j] == VALOR_AGUA) c = '0';
+            else if (tabuleiro[i][j] == VALOR_NAVIO) c = '3';
+            else if (tabuleiro[i][j] == VALOR_HABILIDADE) c = '5';
+            else c = '?';
+            printf("%c ", c);
         }
         printf("\n");
     }
