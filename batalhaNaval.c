@@ -102,6 +102,19 @@ int main() {
         printf("Erro: Não foi possível posicionar o navio vertical.\n");
     }
 
+    // Posiciona navios diagonais
+    if (podePosicionarDiagonal(tabuleiro, linhaD1, colunaD1, 1)) {
+        posicionarNavioDiagonal(tabuleiro, linhaD1, colunaD1, 1);
+    } else {
+        printf("Erro: Não foi possível posicionar navio diagonal principal.\n");
+    }
+
+    if (podePosicionarDiagonal(tabuleiro, linhaD2, colunaD2, 0)) {
+        posicionarNavioDiagonal(tabuleiro, linhaD2, colunaD2, 0);
+    } else {
+        printf("Erro: Não foi possível posicionar navio diagonal secundária.\n");
+    }
+
     // Exibe o tabuleiro final
     exibirTabuleiro(tabuleiro);
 
