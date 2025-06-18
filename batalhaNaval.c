@@ -55,6 +55,15 @@ void exibirTabuleiro(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO]) {
 
 int main() {
 
+    int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO];
+
+    // Coordenadas iniciais dos navios (definidas diretamente no código)
+    int linhaH = 2, colunaH = 3; // Navio horizontal
+    int linhaV = 5, colunaV = 7; // Navio vertical
+
+    // Inicializa o tabuleiro
+    inicializarTabuleiro(tabuleiro);
+
 
 
 
