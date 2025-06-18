@@ -32,11 +32,33 @@ int podePosicionar(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO], int linha, int c
     return 1; // Pode posicionar
 }
 
-// Função para posicionar o navio no tabuleiro
+// Função para posicionar o navio no tabuleiro na horizontal ou vertical
 void posicionarNavio(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO], int linha, int coluna, int horizontal) {
     for (int i = 0; i < TAM_NAVIO; i++) {
         int x = linha + (horizontal ? 0 : i);
         int y = coluna + (horizontal ? i : 0);
+        tabuleiro[x][y] = VALOR_NAVIO;
+    }
+}
+
+// Função para verificar se pode posicionar um navio na diagonal
+int podePosicionarDiagonal(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO], int linha, int coluna, int principal) {
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        int x = linha + i;
+        int y = principal ? (coluna + i) : (coluna - i);
+
+        if (x >= TAM_TABULEIRO || y < 0 || y >= TAM_TABULEIRO || tabuleiro[x][y] != VALOR_AGUA) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// Função para posicionar um navio na diagonal
+void posicionarNavioDiagonal(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO], int linha, int coluna, int principal) {
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        int x = linha + i;
+        int y = principal ? (coluna + i) : (coluna - i);
         tabuleiro[x][y] = VALOR_NAVIO;
     }
 }
