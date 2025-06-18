@@ -10,6 +10,49 @@
 #define VALOR_AGUA 0
 #define VALOR_NAVIO 3
 
+// Função para inicializar o tabuleiro com 0 (representando água)
+void inicializarTabuleiro(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO]) {
+    for (int i = 0; i < TAM_TABULEIRO; i++) {
+        for (int j = 0; j < TAM_TABULEIRO; j++) {
+            tabuleiro[i][j] = VALOR_AGUA;
+        }
+    }
+}
+
+// Função para verificar se é possível posicionar o navio sem ultrapassar os limites ou sobrepor outro navio
+int podePosicionar(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO], int linha, int coluna, int horizontal) {
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        int x = linha + (horizontal ? 0 : i);
+        int y = coluna + (horizontal ? i : 0);
+
+        if (x >= TAM_TABULEIRO || y >= TAM_TABULEIRO || tabuleiro[x][y] != VALOR_AGUA) {
+            return 0; // Não pode posicionar
+        }
+    }
+    return 1; // Pode posicionar
+}
+
+// Função para posicionar o navio no tabuleiro
+void posicionarNavio(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO], int linha, int coluna, int horizontal) {
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        int x = linha + (horizontal ? 0 : i);
+        int y = coluna + (horizontal ? i : 0);
+        tabuleiro[x][y] = VALOR_NAVIO;
+    }
+}
+
+// Função para exibir o tabuleiro no console
+void exibirTabuleiro(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO]) {
+    printf("Tabuleiro:\n");
+    for (int i = 0; i < TAM_TABULEIRO; i++) {
+        for (int j = 0; j < TAM_TABULEIRO; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+
 int main() {
 
 
