@@ -130,7 +130,11 @@ void exibirTabuleiro(int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO]) {
 
 int main() {
 
+    //Declarando o tabuleiro e as Matrizes de habilidades
     int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO];
+    int cone[TAM_HABILIDADE][TAM_HABILIDADE];
+    int cruz[TAM_HABILIDADE][TAM_HABILIDADE];
+    int octaedro[TAM_HABILIDADE][TAM_HABILIDADE];
 
     // Coordenadas iniciais dos navios (definidas diretamente no código)
     int linhaH = 1, colunaH = 2; // Horizontal
@@ -167,6 +171,11 @@ int main() {
     } else {
         printf("Erro: Não foi possível posicionar navio diagonal secundária.\n");
     }
+
+    // Gera as matrizes de habilidades
+    gerarHabilidadeCone(cone);
+    gerarHabilidadeCruz(cruz);
+    gerarHabilidadeOctaedro(octaedro);
 
     // Exibe o tabuleiro final
     exibirTabuleiro(tabuleiro);
