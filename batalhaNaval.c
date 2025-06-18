@@ -80,8 +80,10 @@ int main() {
     int tabuleiro[TAM_TABULEIRO][TAM_TABULEIRO];
 
     // Coordenadas iniciais dos navios (definidas diretamente no código)
-    int linhaH = 2, colunaH = 3; // Navio horizontal
-    int linhaV = 5, colunaV = 7; // Navio vertical
+    int linhaH = 1, colunaH = 2; // Horizontal
+    int linhaV = 4, colunaV = 5; // Vertical
+    int linhaD1 = 0, colunaD1 = 0; // Diagonal principal
+    int linhaD2 = 0, colunaD2 = 9; // Diagonal secundária
 
     // Inicializa o tabuleiro
     inicializarTabuleiro(tabuleiro);
