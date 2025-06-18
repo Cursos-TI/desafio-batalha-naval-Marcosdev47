@@ -177,6 +177,11 @@ int main() {
     gerarHabilidadeCruz(cruz);
     gerarHabilidadeOctaedro(octaedro);
 
+    // Aplica as habilidades no tabuleiro em posições definidas
+    aplicarHabilidade(tabuleiro, cone, 5, 5);
+    aplicarHabilidade(tabuleiro, cruz, 2, 2);
+    aplicarHabilidade(tabuleiro, octaedro, 7, 7);
+
     // Exibe o tabuleiro final
     exibirTabuleiro(tabuleiro);
 
